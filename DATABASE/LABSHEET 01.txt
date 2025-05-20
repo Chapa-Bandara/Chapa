@@ -1,0 +1,342 @@
+//GITHUB DATABASE
+
+Question 01
+
+DO $$
+DECLARE
+      first_name TEXT := 'Yasasthie';
+	  last_name := 'Bandara';
+	message TEXT := 'HELLO';
+BEGIN
+    RAISE NOTICE '%', message '%',first_name '%',last_name;
+END;
+$$ LANGUAGE plpgsql;
+
+//Other part
+
+DO $$
+DECLARE
+    first_name TEXT := 'Yasasthie';
+	last_name TEXT := 'Bandara';
+	full_name TEXT ;
+BEGIN
+    full_name := first_name || '' || last_name;
+	RAISE NOTICE 'full_name := %',full_name;
+END;
+$$ LANGUAGE plpgsql;
+
+
+Question 02
+
+DO
+$$
+DECLARE
+    num1 INT := 10;
+BEGIN
+    RAISE NOTICE '%', num1;
+END;
+$$
+LANGUAGE plpgsql;
+
+
+Question 04
+
+DO
+$$
+DECLARE
+    score INT := 60;
+BEGIN
+    IF score >= 50 THEN
+	   RAISE NOTICE 'Passed %';
+	ELSE
+	    RAISE NOTICE 'Failed';
+	ENDIF;
+END;
+$$ LANGUAGE plpgsql;
+
+DO
+$$
+DECLARE
+    score INT := 60;  -- You must assign a value to 'score'
+BEGIN
+    IF score >= 50 THEN
+        RAISE NOTICE 'Passed';
+    ELSE
+        RAISE NOTICE 'Failed';
+    END IF;
+END;
+$$
+LANGUAGE plpgsql;
+
+
+
+Question 03
+
+DO $$
+DECLARE
+    language TEXT := 'PostgreSQL';
+    ver VARCHAR := '15';
+    message TEXT;
+BEGIN
+   
+    RAISE NOTICE' Your are learning % version %' ,language ,version;
+END;
+$$ LANGUAGE plpgsql;
+
+Question 05
+
+DO $$
+DECLARE
+   score INT := 101;
+BEGIN
+    IF score >= 90 AND score <= 100 THEN
+      RAISE NOTICE 'Excellent';
+	ELSEIF score >= 75 THEN
+	  RAISE NOTICE 'Good';
+	ELSEIF score >=  THEN
+	  RAISE NOTICE 'Average';
+	ELSEIF score < 60 THEN
+	  RAISE NOTICE 'Failed';
+	ELSE
+	  RAICE NOTICE 'Invalid score';
+	END IF;
+END;
+$$ LANGUAGE plpgsql;
+
+Question 06
+
+DO $$
+DECLARE
+	A := Excellent
+	B := Good
+	C := Average
+	D:= Poor
+	E := Fail
+	Defalt Invalid grade;
+    Grade CHAR :=;
+BEGIN
+    WHEN score >= 90 AND score <= 100 THEN
+        RAISE NOTICE 'Excellent';
+    ELSIF score >= 75 THEN
+        RAISE NOTICE 'Good';
+    ELSIF score >= 60 THEN
+        RAISE NOTICE 'Average';
+    ELSIF score < 60 THEN
+        RAISE NOTICE 'Failed';
+    ELSE
+        RAISE NOTICE 'Invalid score';
+    END IF;
+END;
+$$
+LANGUAGE plpgsql;
+
+DO $$
+DECLARE
+    
+    
+    Grade CHAR := 'A';  
+BEGIN
+    CASE Grade
+        WHEN 'A' THEN
+            RAISE NOTICE 'Excellent' ;
+        WHEN 'B' THEN
+            RAISE NOTICE ' Good';
+        WHEN 'C' THEN
+            RAISE NOTICE ' Average';
+        WHEN 'D' THEN
+            RAISE NOTICE 'poor';
+        WHEN 'E' THEN
+            RAISE NOTICE ' Fail';
+        ELSE
+            RAISE NOTICE ' default_grade';
+    END CASE;
+END;
+$$
+LANGUAGE plpgsql;
+
+Question07
+
+
+DO $$
+DECLARE
+    i INT := 1;
+BEGIN
+    LOOP
+        EXIT WHEN i > 5;
+        RAISE NOTICE '%', i;
+        i := i + 1;
+    END LOOP;
+END;
+$$ LANGUAGE plpgsql;
+
+
+
+While Loop
+
+Question08
+
+DO
+$$
+DECLARE
+    i INT := 1;
+BEGIN
+    WHILE i <= 5 Loop 
+        RAISE NOTICE '%', i;
+        i := i + 1;
+    END LOOP;
+END;
+$$
+LANGUAGE plpgsql;
+
+
+
+For LOOP
+
+Question09
+
+DO $$
+DECLARE
+    i INT := 1;  (Optional as there is the starting valuwe for the loop)
+BEGIN
+    FOR i IN 1..5 LOOP
+        RAISE NOTICE '%', i;
+        i := i + 1;
+    END LOOP;
+END;
+$$ LANGUAGE plpgsql;
+
+
+
+
+Exception Handling
+
+
+DO
+$$
+DECLARE
+	no_of_students INT :='50';
+    answer INT :=;
+BEGIN
+    answer=100/no_of_students;
+	 RAISE NOTICE '%', answer;
+	
+END;
+$$
+LANGUAGE plpgsql;
+
+
+
+DO $$
+DECLARE
+    no_of_students INT := 0;
+    answer INT;
+BEGIN
+    answer := 100 / no_of_students;
+    RAISE NOTICE '%', answer;
+	
+Exception
+	WHEN division_by_zero THEN
+	RAISE NOTICE 'Error:Cannot divide by zero';
+	
+END;
+$$ LANGUAGE plpgsql;
+
+
+
+
+Question 10
+
+DO $$
+DECLARE
+    i INT := 1;
+	answer INT;
+BEGIN
+	answer := i/2;
+    IF answer = 0 THEN 
+	 RAISE NOTICE '%', answer;
+    ELSE
+	
+    LOOP
+        EXIT WHEN i <=10;
+        RAISE NOTICE '%', i;
+        i := i + 1;
+    END LOOP;
+END;
+$$ LANGUAGE plpgsql;
+
+
+
+
+DO $$
+DECLARE
+    i INT := 1;
+    answer INT;
+BEGIN
+    answer := i / 2;
+
+    IF answer = 0 THEN 
+        RAISE NOTICE 'Answer is: %', answer;
+    ELSE
+        LOOP
+            EXIT WHEN i > 10;
+            RAISE NOTICE 'i is: %', i;
+            i := i + 1;
+        END LOOP;
+    END IF;
+END;
+$$ LANGUAGE plpgsql;
+
+DO $$
+DECLARE
+    i INT := 1;
+BEGIN
+    WHILE i < 10 LOOP
+        IF i % 2 = 0 THEN
+            RAISE NOTICE 'Even number: %', i;
+        END IF;
+        i := i + 1;
+    END LOOP;
+END;
+$$ LANGUAGE plpgsql;
+
+
+
+Question12
+
+DO $$
+DECLARE
+    i INT := 1;
+	sum INT :0;
+BEGIN
+    WHILE i < 100 LOOP
+        IF i % 2 = 0 THEN
+           I:= i+1;
+		   con
+        END IF;
+        i := i + 1;
+    END LOOP;
+END;
+$$ LANGUAGE plpgsql;
+
+
+
+Question13
+
+DO $$
+DECLARE
+    i INT := 1;
+	
+BEGIN
+    FOR i IN 1..15 LOOP
+		IF i/3=0 AND i/5=0 THEN	
+			RAISE NOTICE 'FizzBuzz';
+		ELSIF i/3=0 THEN
+			RAISE NOTICE 'Fizz';
+		ELSEIF i/5 =0 THEN 
+			RAISE NOTICE 'Buzz';
+		ELSE
+			RAISE NOTICE '%',i;
+		END IF;
+	END LOOP;
+END;
+$$ LANGUAGE plpgsql;
